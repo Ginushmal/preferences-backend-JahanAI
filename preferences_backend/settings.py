@@ -46,6 +46,8 @@ SESSION_COOKIE_SAMESITE = "None"  # Required for cross-site cookie sharing
 CSRF_COOKIE_SAMESITE = "None" 
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = False
+CORS_EXPOSE_HEADERS = ['X-CSRFToken']
+
 
 # Application definition
 
