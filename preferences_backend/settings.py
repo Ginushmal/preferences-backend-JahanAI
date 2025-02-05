@@ -35,6 +35,11 @@ CORS_ALLOW_ALL_ORIGINS = True  # Set to True to allow all origins (not recommend
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Allow frontend requests
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://webix-jet-jahanai.vercel.app",  # Your deployed frontend
+    "http://localhost:5173",  # Your local frontend
+]
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = "None"  # Required for cross-site cookie sharing
