@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny
+from django.middleware.csrf import get_token
 
 
 @api_view(["POST"])
@@ -19,7 +20,12 @@ def user_login(request):
     user = authenticate(username=username, password=password)
     if user:
         login(request, user)
-        return JsonResponse({"message": "Login successful", "user": user.username})
+        # Create response and send CSRF token in the header
+        response = JsonResponse({"message": "Login successful", "user": user.username})
+        response["X-CSRFToken"] = get_token(request)  # Attach CSRF token in the header
+        print("X-CSRFToken", get_token(request) )
+        return response
+
     return JsonResponse({"error": "Invalid credentials"}, status=400)
 
 @api_view(["POST"])
@@ -36,7 +42,7 @@ def user_status(request):
 
 
 @api_view(['GET', 'PUT'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def user_preferences(request):
     # pref, created = Preference.objects.get_or_create(user=request.user)
     print(request.user)
