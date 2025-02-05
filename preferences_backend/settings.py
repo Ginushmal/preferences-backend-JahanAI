@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-xp4lialx#299etm5%01s3z@bwfb=5rajyc9_oug(fm=qprj_7m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 CORS_ALLOW_CREDENTIALS = True
 
@@ -37,10 +37,10 @@ CORS_ALLOWED_ORIGINS = [
 ]
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SAMESITE = "Lax"  # Required for cross-site cookie sharing
-CSRF_COOKIE_SAMESITE = "Lax" 
-# SESSION_COOKIE_HTTPONLY = False
-# CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_SAMESITE = "None"  # Required for cross-site cookie sharing
+CSRF_COOKIE_SAMESITE = "None" 
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = False
 
 # Application definition
 
@@ -57,9 +57,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
