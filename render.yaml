@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: preferences-backend-JahanAl
+    env: python
+    buildCommand: "pip install -r requirements.txt && python manage.py migrate"
+    startCommand: "gunicorn myproject.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        value: "sqlite:///db.sqlite3"
+      - key: SECRET_KEY
+        generateValue: true

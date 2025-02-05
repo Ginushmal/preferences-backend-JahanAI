@@ -1,0 +1,1 @@
+web: gunicorn preferences_backend.wsgi
