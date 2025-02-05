@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,15 +28,15 @@ SECRET_KEY = 'django-insecure-xp4lialx#299etm5%01s3z@bwfb=5rajyc9_oug(fm=qprj_7m
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_ALL_ORIGINS = True  # Set to True to allow all origins (not recommended for production)
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Allow frontend requests
 ]
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = "Lax"  # Required for cross-site cookie sharing
 CSRF_COOKIE_SAMESITE = "Lax" 
 # SESSION_COOKIE_HTTPONLY = False
@@ -137,3 +139,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
